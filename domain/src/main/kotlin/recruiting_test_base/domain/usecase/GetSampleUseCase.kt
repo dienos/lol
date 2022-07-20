@@ -14,7 +14,7 @@ class GetSampleUseCase(private val repository: SampleRepository) {
     ) {
         scope.launch(Dispatchers.Main) {
             val deferred = async(Dispatchers.IO) {
-                repository.sample()
+                repository.getSample()
             }
             onResult(deferred.await())
         }

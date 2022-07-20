@@ -3,6 +3,17 @@ object Config {
 
     object Android {
         const val androidGradle = "com.android.tools.build:gradle:7.0.2"
+
+        object Lifecycle {
+            private const val lifecycleVersion = "2.3.1"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+            const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+            const val service = "androidx.lifecycle:lifecycle-service:$lifecycleVersion"
+            const val process = "androidx.lifecycle:lifecycle-process:$lifecycleVersion"
+            const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+            const val lifecycleTest = "androidx.arch.core:core-testing:2.1.0"
+        }
     }
 
     object Test {
