@@ -1,15 +1,15 @@
 plugins {
-    id(Plugins.library)
-    id(Plugins.kotlin)
+    id(Config.Plugins.library)
+    id(Config.Plugins.kotlin)
 }
 
 android {
-    compileSdk = Version.compileSdk
+    compileSdk = Config.Version.compileSdk
 
     defaultConfig {
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-        testInstrumentationRunner = Config.Test.jUnitRunner
+        minSdk = Config.Version.minSdk
+        targetSdk = Config.Version.targetSdk
+        testInstrumentationRunner = Config.Android.Test.jUnitRunner
     }
 
     buildTypes {

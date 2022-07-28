@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath(Config.Android.androidGradle)
         classpath(Config.Kotlin.kotlinGradle)
-        classpath(Config.Hilt.hiltAndroidGradle)
+        classpath(Config.Android.Hilt.hiltAndroidGradle)
     }
 }
 

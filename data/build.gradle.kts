@@ -1,17 +1,17 @@
 plugins {
-    id(Plugins.library)
-    id(Plugins.kotlin)
-    id(Plugins.kapt)
-    id(Plugins.hilt)
+    id(Config.Plugins.library)
+    id(Config.Plugins.kotlin)
+    id(Config.Plugins.kapt)
+    id(Config.Plugins.hilt)
 }
 
 android {
-    compileSdk = Version.compileSdk
+    compileSdk = Config.Version.compileSdk
 
     defaultConfig {
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-        testInstrumentationRunner = Config.Test.jUnitRunner
+        minSdk = Config.Version.minSdk
+        targetSdk = Config.Version.targetSdk
+        testInstrumentationRunner = Config.Android.Test.jUnitRunner
     }
 
     buildTypes {
@@ -31,13 +31,17 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.domain))
+    implementation(project(Config.Modules.domain))
 
     implementation(Config.Square.retrofit)
     implementation(Config.Square.retrofitGsonConverter)
 
-    implementation(Config.Hilt.hiltAndroid)
-    kapt(Config.Hilt.hiltAndroidCompiler)
-    kapt(Config.Hilt.hiltCompiler)
-    implementation(Config.Hilt.hiltLifecycleViewModel)
+    kapt(Config.Android.Hilt.hiltAndroidCompiler)
+    kapt(Config.Android.Hilt.hiltCompiler)
+    implementation(Config.Android.Hilt.hiltAndroid)
+    implementation(Config.Android.Hilt.hiltLifecycleViewModel)
+
+    testImplementation(Config.Android.Test.mockk)
+    testImplementation(Config.Kotlin.Coroutine.coroutineTest)
+    testImplementation(Config.Android.Test.core)
 }
