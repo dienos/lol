@@ -44,6 +44,9 @@ dependencies {
     implementation(project(Config.Modules.data))
     implementation(project(Config.Modules.domain))
 
+    implementation(Config.Android.Room.runtime)
+    annotationProcessor(Config.Android.Room.compiler)
+
     implementation(Config.Android.Hilt.hiltAndroid)
     kapt(Config.Android.Hilt.hiltAndroidCompiler)
     kapt(Config.Android.Hilt.hiltCompiler)

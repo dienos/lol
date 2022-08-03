@@ -13,6 +13,12 @@ object Config {
             const val fragment = "androidx.fragment:fragment-ktx:1.2.5"
         }
 
+        object Room {
+            private const val roomVersion = "2.4.2"
+            val runtime = "androidx.room:room-runtime:$roomVersion"
+            val compiler = "androidx.room:room-compiler:$roomVersion"
+        }
+
         object Test {
             const val jUnitRunner = "androidx.test.runner.AndroidJUnitRunner"
             const val mockk = "io.mockk:mockk:1.11.0"

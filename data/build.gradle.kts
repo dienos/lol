@@ -36,6 +36,9 @@ dependencies {
     implementation(Config.Square.retrofit)
     implementation(Config.Square.retrofitGsonConverter)
 
+    implementation(Config.Android.Room.runtime)
+    annotationProcessor(Config.Android.Room.compiler)
+
     kapt(Config.Android.Hilt.hiltAndroidCompiler)
     kapt(Config.Android.Hilt.hiltCompiler)
     implementation(Config.Android.Hilt.hiltAndroid)
