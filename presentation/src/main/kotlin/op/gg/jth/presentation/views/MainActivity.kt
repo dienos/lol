@@ -2,6 +2,7 @@ package op.gg.jth.presentation.views
 
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import op.gg.jth.presentation.BR
 import op.gg.jth.presentation.R
 import op.gg.jth.presentation.databinding.MainActivityBinding
 import op.gg.jth.presentation.viewmodels.MainViewModel
@@ -18,6 +19,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
         viewModel.getSummoner()
+        viewModel.getGames()
     }
 
     override fun initializeUiEvent() {

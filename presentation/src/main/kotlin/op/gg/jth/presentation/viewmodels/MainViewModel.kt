@@ -9,6 +9,7 @@ import op.gg.jth.domain.model.remote.GamesResponseRepo
 import op.gg.jth.domain.model.remote.SummonerResponseRepo
 import op.gg.jth.domain.usecase.GetGamesUseCase
 import op.gg.jth.domain.usecase.GetSummonerUseCase
+import op.gg.jth.presentation.BR
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +17,15 @@ class MainViewModel @Inject constructor(
     private val getSummonerUseCase: GetSummonerUseCase,
     private val getGamesUseCase: GetGamesUseCase,
 ) : BaseViewModel() {
+    companion object {
+        const val GAME_AVERAGE_TYPE_KILL = "kill"
+        const val GAME_AVERAGE_TYPE_ASSIST = "assist"
+        const val GAME_AVERAGE_TYPE_DEATH = "death"
+    }
+
+    var killAverage = 0.0f
+    var assistAverage = 0.0f
+    var deathAverage = 0.0f
 
     private var _summonerResponse = MutableLiveData<SummonerResponseRepo>()
     val summonerResponse: LiveData<SummonerResponseRepo> = _summonerResponse
@@ -29,7 +39,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getGames(lastMatch: Int) {
+    fun getGames(lastMatch: Int = 0) {
         viewModelScope.launch {
             _gamesResponse.value = getGamesUseCase(lastMatch)
         }

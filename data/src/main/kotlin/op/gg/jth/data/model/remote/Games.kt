@@ -19,7 +19,7 @@ data class Games(
     @SerializedName("needRenew")
     val _needRenew : Boolean,
 
-    @SerializedName("needRenew")
+    @SerializedName("gameId")
     val _gameId : String,
 
     @SerializedName("createDate")
@@ -44,7 +44,7 @@ data class Games(
     val _stats : Stats,
 
     @SerializedName("mapInfo")
-    val _mapInfo : Any?,
+    val _mapInfo : String?,
 
     @SerializedName("peak")
     val _peak : List<String>,

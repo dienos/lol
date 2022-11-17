@@ -20,7 +20,7 @@ data class General(
     val _cs : Int,
 
     @SerializedName("csPerMin")
-    val _csPerMin : Int,
+    val _csPerMin : Float,
 
     @SerializedName("contributionForKillRate")
     val _contributionForKillRate : String,
@@ -43,7 +43,7 @@ data class General(
     override val contributionForKillRate: String
         get() = _contributionForKillRate
 
-    override val csPerMin: Int
+    override val csPerMin: Float
         get() = _csPerMin
 
     override val cs: Int

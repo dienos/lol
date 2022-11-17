@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="op.gg.jth.presentation.viewmodels.MainViewModel" />
+
+        <variable
+            name="leagueItem"
+            type="op.gg.jth.domain.model.remote.LeagueRepo" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangle_4_white"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            app:game_image="@{leagueItem.tierRank.imageUrl}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{leagueItem.tierRank.name}"
+                android:textColor="@color/soft_blue"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{leagueItem.tierRank.tier}"
+                android:textColor="@color/dark_grey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/dark_grey"
+                android:textSize="10sp"
+                app:lp="@{leagueItem.tierRank.lp}"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/cool_grey"
+                android:textSize="10sp"
+                app:losses="@{leagueItem.losses}"
+                app:wins="@{leagueItem.wins}"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="34dp"
+            android:background="@drawable/shape_rectangle_21_pale_grey"
+            android:src="@drawable/ic_icon_arrow_right" />
+    </LinearLayout>
+
+</layout>

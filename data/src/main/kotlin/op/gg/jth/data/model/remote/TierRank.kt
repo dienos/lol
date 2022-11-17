@@ -37,8 +37,8 @@ data class TierRank (
     override val imageUrl: String
         get() = _imageUrl
 
-    override val lp: Int
-        get() = _lp
+    override val lp: String
+        get() = _lp.toString()
 
     override val name: String
         get() = _name
