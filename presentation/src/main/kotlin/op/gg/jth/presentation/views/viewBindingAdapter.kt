@@ -31,7 +31,7 @@ fun setLeagues(view: RecyclerView, items: List<LeagueRepo>?) {
             val adapter = LeagueListAdapter()
             view.adapter = adapter
             adapter.submitList(items)
-            view.addItemDecoration(RecyclerDecoration(100))
+            view.addItemDecoration(RecyclerDecoration(16))
         }
     }
 }
@@ -173,7 +173,7 @@ private class RecyclerDecoration(private val divWidth: Int) : ItemDecoration() {
 
         parent.adapter?.let {
             if (parent.getChildAdapterPosition(view) != it.itemCount - 1) {
-                outRect.bottom = divWidth
+                outRect.right = divWidth
             }
         }
     }
