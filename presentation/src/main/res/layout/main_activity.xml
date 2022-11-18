@@ -19,192 +19,283 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/ll_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    app:game_image="@{viewModel.summonerResponse.summoner.profileImageUrl}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="62dp"
-                    android:background="@drawable/shape_rectangle_12_dark_grey"
-                    android:paddingHorizontal="6dp"
-                    android:paddingVertical="3dp"
-                    android:text="@{viewModel.summonerResponse.summoner.level}"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
             <LinearLayout
+                android:id="@+id/ll_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
+                android:layout_marginTop="36dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.summonerResponse.summoner.name}"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        app:game_image="@{viewModel.summonerResponse.summoner.profileImageUrl}"
+                        app:type="@{viewModel.IMAGE_TYPE_CIRCLE}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="62dp"
+                        android:background="@drawable/shape_rectangle_12_dark_grey"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="3dp"
+                        android:text="@{viewModel.summonerResponse.summoner.level}"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/shape_rectangle_20_soft_blue"
-                    android:onClick="@{() -> viewModel.getGames(0)}"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="10dp"
-                    android:text="@string/refresh_score"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.summonerResponse.summoner.name}"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_rectangle_20_soft_blue"
+                        android:onClick="@{() -> viewModel.initGames(0)}"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:text="@string/refresh_score"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rl_summoners"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/ll_profile"
-            app:leagues="@{viewModel.summonerResponse.summoner.leagues}"
-            tools:ignore="RtlSymmetry" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rl_summoners"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/ll_profile"
+                app:leagues="@{viewModel.summonerResponse.summoner.leagues}"
+                tools:ignore="RtlSymmetry" />
 
-        <View
-            android:id="@+id/v_line"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/pale_grey_two"
-            app:layout_constraintTop_toBottomOf="@+id/rl_summoners" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/v_line">
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/pale_grey_two"
+                app:layout_constraintTop_toBottomOf="@+id/rl_summoners" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/ll_recent_game"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recent_20_game"
-                    android:textColor="@color/cool_grey"
-                    android:textSize="10sp"
-                    tools:ignore="SmallSp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/cool_grey"
-                    android:textSize="10sp"
-                    app:games="@{viewModel.gamesResponse.games}"
-                    tools:ignore="SmallSp" />
-
-                <LinearLayout
-                    android:id="@+id/ll_game_average"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/charcoal_grey"
-                        android:textSize="14sp"
-                        app:type ="@{viewModel.GAME_AVERAGE_TYPE_KILL}"
-                        app:games_average ="@{viewModel.gamesResponse.games}"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:text="/"
-                        android:textColor="@color/charcoal_grey"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/darkish_pink"
-                        app:type ="@{viewModel.GAME_AVERAGE_TYPE_ASSIST}"
-                        app:games_average ="@{viewModel.gamesResponse.games}"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:text="/"
-                        android:textColor="@color/charcoal_grey"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        app:type ="@{viewModel.GAME_AVERAGE_TYPE_DEATH}"
-                        app:games_average ="@{viewModel.gamesResponse.games}"
-                        android:textColor="@color/charcoal_grey"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+                android:orientation="horizontal"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/v_line">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/azure"
+                        android:text="@string/recent_20_game"
+                        android:textColor="@color/cool_grey"
                         android:textSize="10sp"
-                        app:games_kda="@{viewModel.gamesResponse.games}"
                         tools:ignore="SmallSp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        app:winning_rate="@{viewModel.gamesResponse.games}"
-                        android:textColor="@color/darkish_pink"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/cool_grey"
                         android:textSize="10sp"
-                        tools:ignore="SmallSp"
-                        />
+                        app:last_twenty_games="@{viewModel.recentTwentyGames.games}"
+                        tools:ignore="SmallSp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_game_average"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/charcoal_grey"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:games_average="@{viewModel.recentTwentyGames.games}"
+                            app:type="@{viewModel.GAME_AVERAGE_TYPE_KILL}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="/"
+                            android:textColor="@color/charcoal_grey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:textColor="@color/darkish_pink"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:games_average="@{viewModel.recentTwentyGames.games}"
+                            app:type="@{viewModel.GAME_AVERAGE_TYPE_ASSIST}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="/"
+                            android:textColor="@color/charcoal_grey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:textColor="@color/charcoal_grey"
+                            android:textSize="14sp"
+                            app:games_average="@{viewModel.recentTwentyGames.games}"
+                            app:type="@{viewModel.GAME_AVERAGE_TYPE_DEATH}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/azure"
+                            android:textSize="10sp"
+                            app:games_kda="@{viewModel.recentTwentyGames.games}"
+                            tools:ignore="SmallSp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:textColor="@color/darkish_pink"
+                            android:textSize="10sp"
+                            app:winning_rate="@{viewModel.recentTwentyGames.games}"
+                            tools:ignore="SmallSp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/most_winning_rate"
+                        android:textColor="@color/cool_grey"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="LinearLayoutManager"
+                        app:most_winning_rate="@{viewModel.mostWinningRateChampions.champions}"
+                        tools:ignore="RtlSymmetry" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="61dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/most_position"
+                        android:textColor="@color/cool_grey"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_horizontal"
+                            app:game_position="@{viewModel.championPosition.positions}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_icon_lol_bot"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="10sp"
+                            app:most_champion="@{viewModel.mostWinningRateChampions.champions}"
+                            tools:ignore="SmallSp" />
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:id="@+id/v_line2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/pale_grey_two" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rl_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:view_model="@{viewModel}"
+                app:games="@{viewModel.gamesResponse.games}"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/v_line2"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

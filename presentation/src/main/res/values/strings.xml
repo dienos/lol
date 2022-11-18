@@ -1,9 +1,20 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">롤전장실</string>
     <string name="refresh_score">전적갱신</string>
     <string name="tier_lp">%s LP</string>
-    <string name="score">%1$s승 %2$s패 <![CDATA[(]]>%3$s<![CDATA[)]]>%%</string>
+    <string name="score">%1$s승 %2$s패 <![CDATA[(]]>%3$s<![CDATA[%%)]]></string>
     <string name="recent_score">%1$d승 %2$d패</string>
+    <string name="winning_rate"><![CDATA[(]]>%s<![CDATA[%%)]]></string>
+    <string name="rate">%s%%</string>
     <string name="score_empty">전적없음</string>
     <string name="recent_20_game">최근 20게임 분석</string>
+    <string name="most_winning_rate">모스트 승률</string>
+    <string name="win">승</string>
+    <string name="lose">패</string>
+    <string name="game_length">%1$s : %2$s</string>
+    <string name="help_kill">킬관여 %s</string>
+    <string name="minutes_ago"> 전</string>
+    <string name="minutes">%s분</string>
+    <string name="hour">%s시간</string>
+    <string name="most_position" tools:ignore="ExtraTranslation">포지션</string>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="op.gg.jth.presentation.viewmodels.MainViewModel" />
+
+        <variable
+            name="championItem"
+            type="op.gg.jth.data.model.local.LocalChampion" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:type="@{viewModel.IMAGE_TYPE_CIRCLE}"
+            app:game_image="@{championItem.imageUrl}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="10sp"
+            app:most_champion="@{championItem}"
+            tools:ignore="SmallSp" />
+
+    </LinearLayout>
+</layout>

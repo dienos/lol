@@ -29,6 +29,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
+            app:type="@{viewModel.IMAGE_TYPE_DEFAULT}"
             app:game_image="@{leagueItem.tierRank.imageUrl}" />
 
         <LinearLayout

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="op.gg.jth.presentation.viewmodels.MainViewModel" />
+
+        <variable
+            name="spellItem"
+            type="op.gg.jth.domain.model.remote.SpellsRepo" />
+    </data>
+
+    <ImageView
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        app:game_image="@{spellItem.imageUrl}"
+        app:type="@{viewModel.IMAGE_TYPE_CIRCLE}" />
+
+</layout>

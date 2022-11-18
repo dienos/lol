@@ -10,7 +10,7 @@ import op.gg.jth.domain.model.remote.LeagueRepo
 import op.gg.jth.presentation.BR
 import op.gg.jth.presentation.databinding.LeagueItemBinding
 
-class LeagueListAdapter : ListAdapter<LeagueRepo, LeagueListAdapter.LeagueViewHolder>(FlowerDiffCallback) {
+class LeagueListAdapter : ListAdapter<LeagueRepo, LeagueListAdapter.LeagueViewHolder>(LeagueDiffCallback) {
 
     private lateinit var binding: LeagueItemBinding
 
@@ -30,7 +30,7 @@ class LeagueListAdapter : ListAdapter<LeagueRepo, LeagueListAdapter.LeagueViewHo
     }
 }
 
-object FlowerDiffCallback : DiffUtil.ItemCallback<LeagueRepo>() {
+object LeagueDiffCallback : DiffUtil.ItemCallback<LeagueRepo>() {
     override fun areItemsTheSame(oldItem: LeagueRepo, newItem: LeagueRepo): Boolean {
         return oldItem == newItem
     }
