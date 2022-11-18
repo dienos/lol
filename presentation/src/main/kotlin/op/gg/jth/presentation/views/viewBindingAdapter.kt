@@ -1,12 +1,13 @@
 package op.gg.jth.presentation.views
 
+import android.content.Intent
 import android.graphics.Rect
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.createBitmap
-import androidx.core.view.get
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
