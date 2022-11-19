@@ -19,5 +19,10 @@
     <color name="periwinkle">#8b68ff</color>
     <color name="gunmetal">#52595f</color>
 
+    <color name="shimmer_bg">#F1F3F5</color>
+    <color name="shimmer_highlight_color">#F7F8F9</color>
+
+
+
 
 </resources>

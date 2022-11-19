@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import op.gg.jth.data.extension.getWinningRate
 import op.gg.jth.data.model.local.ChampionPosition
@@ -38,6 +39,15 @@ class MainViewModel @Inject constructor(
         const val POSITION_MID = "Middle"
     }
 
+    private val _summonerShimmerFlow = MutableStateFlow(false)
+    val summonerShimmerFlow = _summonerShimmerFlow.asStateFlow()
+
+    private val _recentGameShimmerFlow = MutableStateFlow(false)
+    val recentGameShimmerFlow = _recentGameShimmerFlow.asStateFlow()
+
+    private val _gamesShimmerFlow = MutableStateFlow(false)
+    val gamesShimmerFlow = _gamesShimmerFlow.asStateFlow()
+
     var needRefresh = false
 
     private var _summonerResponse = MutableLiveData<SummonerResponseRepo>()
@@ -57,12 +67,14 @@ class MainViewModel @Inject constructor(
 
     fun getSummoner() {
         updateProgress(true)
+        updateSummonerShimmer(true)
 
         viewModelScope.launch {
             _summonerResponse.value = getSummonerUseCase.invoke()
         }
 
         updateProgress(false)
+        updateSummonerShimmer(false)
     }
 
     fun getGames(lastMatch: Int = 0) {
@@ -78,11 +90,17 @@ class MainViewModel @Inject constructor(
     }
 
     fun initGames(lastMatch: Int = 0) {
-        updateProgress(true)
+        //updateProgress(true)
+        updateRecentGameShimmer(true)
+        updateGamesShimmer(true)
 
         getGamesUseCase(lastMatch = lastMatch, scope = viewModelScope, { result ->
             needRefresh = true
-            updateProgress(false)
+
+            //updateProgress(false)
+            updateRecentGameShimmer(false)
+            updateGamesShimmer(false)
+
             _gamesResponse.value = result
             _recentTwentyGames.value = RecentTwentyGames(getRecentTwentyList(result.games))
             _mostWinningRateChampions.value =
@@ -91,7 +109,9 @@ class MainViewModel @Inject constructor(
             _championPosition.value = ChampionPosition(result.positions)
         }, {
             updateToast(it)
-            updateProgress(false)
+            updateRecentGameShimmer(false)
+            updateGamesShimmer(false)
+            //updateProgress(false)
         })
     }
 
@@ -127,5 +147,17 @@ class MainViewModel @Inject constructor(
         }
 
         return result
+    }
+
+    private fun updateSummonerShimmer(flow: Boolean) {
+        _summonerShimmerFlow.value = flow
+    }
+
+    private fun updateRecentGameShimmer(flow: Boolean) {
+        _recentGameShimmerFlow.value = flow
+    }
+
+    private fun updateGamesShimmer(flow: Boolean) {
+        _gamesShimmerFlow.value = flow
     }
 }

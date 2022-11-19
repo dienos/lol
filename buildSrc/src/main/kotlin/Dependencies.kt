@@ -91,6 +91,11 @@ object Config {
         }
     }
 
+    object Facebook {
+        private const val facebookVersion = "0.5.0"
+        const val shimmer = "com.facebook.shimmer:shimmer:$facebookVersion"
+    }
+
     object Plugins {
         const val application = "com.android.application"
         const val library = "com.android.library"
