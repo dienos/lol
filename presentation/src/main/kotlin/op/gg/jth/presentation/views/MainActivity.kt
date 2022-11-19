@@ -88,7 +88,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                             binding?.gamesShimmer?.stopShimmer()
                             binding?.gamesShimmer?.hideShimmer()
                             binding?.llGamesShimmer?.root?.visibility = View.GONE
-                        }, 1000
+                        }, 500
                     )
                 }
             }

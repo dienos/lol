@@ -1,6 +1,7 @@
 package op.gg.jth.presentation.views
 
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import op.gg.jth.presentation.BR
 import op.gg.jth.presentation.databinding.GameItemBinding
 
 class GameListAdapter : ListAdapter<GamesRepo, GameListAdapter.GameViewHolder>(GameDiffCallback) {
-    private lateinit var binding: GameItemBinding
+    lateinit var binding: GameItemBinding
     var currentGames : ArrayList<GamesRepo> = arrayListOf()
 
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

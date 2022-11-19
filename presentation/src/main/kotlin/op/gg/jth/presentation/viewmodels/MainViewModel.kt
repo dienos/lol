@@ -8,10 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import op.gg.jth.data.extension.getWinningRate
-import op.gg.jth.data.model.local.ChampionPosition
-import op.gg.jth.data.model.local.LocalChampion
-import op.gg.jth.data.model.local.MostWinningRateChampions
-import op.gg.jth.data.model.local.RecentTwentyGames
+import op.gg.jth.data.model.local.*
 import op.gg.jth.domain.model.remote.ChampionsRepo
 import op.gg.jth.domain.model.remote.GamesRepo
 import op.gg.jth.domain.model.remote.GamesResponseRepo
@@ -62,6 +59,9 @@ class MainViewModel @Inject constructor(
     private var _mostWinningRateChampions = MutableLiveData<MostWinningRateChampions>()
     val mostWinningRateChampions: LiveData<MostWinningRateChampions> = _mostWinningRateChampions
 
+    private var _items = MutableLiveData<MostWinningRateChampions>()
+    val items: LiveData<MostWinningRateChampions> = _items
+
     private var _championPosition = MutableLiveData<ChampionPosition>()
     val championPosition: LiveData<ChampionPosition> = _championPosition
 
@@ -79,25 +79,28 @@ class MainViewModel @Inject constructor(
 
     fun getGames(lastMatch: Int = 0) {
         updateProgress(true)
+        updateGamesShimmer(true)
 
         getGamesUseCase(lastMatch = lastMatch, scope = viewModelScope, { result ->
             updateProgress(false)
+            updateGamesShimmer(false)
             _gamesResponse.value = result
         }, {
             updateToast(it)
             updateProgress(false)
+            updateGamesShimmer(false)
         })
     }
 
     fun initGames(lastMatch: Int = 0) {
-        //updateProgress(true)
+        updateProgress(true)
         updateRecentGameShimmer(true)
         updateGamesShimmer(true)
 
         getGamesUseCase(lastMatch = lastMatch, scope = viewModelScope, { result ->
             needRefresh = true
 
-            //updateProgress(false)
+            updateProgress(false)
             updateRecentGameShimmer(false)
             updateGamesShimmer(false)
 
@@ -105,13 +108,12 @@ class MainViewModel @Inject constructor(
             _recentTwentyGames.value = RecentTwentyGames(getRecentTwentyList(result.games))
             _mostWinningRateChampions.value =
                 MostWinningRateChampions(getMostWinningRateChampions(result.champions))
-
             _championPosition.value = ChampionPosition(result.positions)
         }, {
             updateToast(it)
             updateRecentGameShimmer(false)
             updateGamesShimmer(false)
-            //updateProgress(false)
+            updateProgress(false)
         })
     }
 

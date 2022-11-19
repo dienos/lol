@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="op.gg.jth.presentation.viewmodels.MainViewModel" />
+
+        <variable
+            name="item"
+            type="op.gg.jth.data.model.local.ItemUrl"/>
+    </data>
+
+    <ImageView
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        app:item_image="@{item.url}"/>
+
+</layout>

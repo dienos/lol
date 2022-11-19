@@ -1,13 +1,9 @@
 package op.gg.jth.presentation.views
 
-import android.content.Intent
 import android.graphics.Rect
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.bumptech.glide.Glide
 import op.gg.jth.data.extension.getWinningRate
+import op.gg.jth.data.model.local.ItemUrl
 import op.gg.jth.data.model.local.LocalChampion
-import op.gg.jth.domain.model.remote.GamesRepo
-import op.gg.jth.domain.model.remote.LeagueRepo
-import op.gg.jth.domain.model.remote.PositionsRepo
-import op.gg.jth.domain.model.remote.SpellsRepo
+import op.gg.jth.domain.model.remote.*
 import op.gg.jth.presentation.R
 import op.gg.jth.presentation.viewmodels.MainViewModel
 import op.gg.jth.presentation.viewmodels.MainViewModel.Companion.IMAGE_TYPE_CIRCLE
@@ -39,6 +33,17 @@ fun setImage(view: ImageView, type: String, url: String?) {
             Glide.with(view.context).load(it).circleCrop().into(view)
         } else {
             Glide.with(view.context).load(it).into(view)
+        }
+    }
+}
+
+@BindingAdapter(value = ["item_image"])
+fun setItemImage(view: ImageView, url: String?) {
+    url?.let {
+        if(url.isNotEmpty()) {
+            Glide.with(view.context).load(it).into(view)
+        } else {
+            view.setBackgroundColor(view.context.resources.getColor(R.color.pale_grey_two))
         }
     }
 }
@@ -73,10 +78,34 @@ fun setSkills(view: RecyclerView, items: List<SpellsRepo>?) {
     }
 }
 
+@BindingAdapter(value = ["items"])
+fun setItems(view: RecyclerView, items: List<ItemRepo>?) {
+    items?.let {
+        val result : ArrayList<ItemUrl> = arrayListOf()
+        items.forEach {
+            result.add(ItemUrl(it.imageUrl))
+        }
+
+        if(result.size < 6) {
+            val diff = 6 - items.size
+
+            for(i: Int in 1..diff){
+                result.add(ItemUrl(""))
+            }
+        }
+
+        val layoutManager = LinearLayoutManager(view.context)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        view.layoutManager =layoutManager
+        view.adapter = ItemListAdapter(result)
+        view.addItemDecoration(RecyclerDecoration(4 ))
+    }
+}
+
 @BindingAdapter(value = ["view_model", "games"])
 fun setGames(view: RecyclerView, viewModel: MainViewModel, items: List<GamesRepo>?) {
     items?.let {
-        if(viewModel.needRefresh) {
+        if (viewModel.needRefresh) {
             view.adapter = null
         }
 
@@ -104,10 +133,9 @@ fun setGames(view: RecyclerView, viewModel: MainViewModel, items: List<GamesRepo
                             .findLastVisibleItemPosition()
                     val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
 
-                    itemTotalCount?.let {
-                        itemCount ->
+                    itemTotalCount?.let { itemCount ->
                         if (itemCount - 20 <= lastVisibleItemPosition) {
-                            if(viewModel.progressFlow.value.not()) {
+                            if (viewModel.progressFlow.value.not()) {
                                 viewModel.getGames(adapter.currentGames[itemTotalCount].createDate)
                             }
                         }

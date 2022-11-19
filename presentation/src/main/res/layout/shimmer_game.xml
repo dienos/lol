@@ -4,12 +4,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="105dp"
+        >
         <LinearLayout
             android:id="@+id/ll_game_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/shape_rectangle_4_shimmer"
             android:orientation="horizontal"
             android:paddingEnd="13dp"
@@ -18,7 +18,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_game_result"
-                android:layout_width="66dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/cool_grey"
                 android:gravity="center"
@@ -54,9 +54,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp"
                 android:paddingVertical="29dp">
+
 
                 <LinearLayout
                     android:id="@+id/ll_game_info"
@@ -65,7 +64,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
-                    >
+                    android:paddingHorizontal="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,32 +140,8 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="24dp"
-                        android:background="@color/cool_grey" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/cool_grey" />
-                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <View
-            android:id="@+id/v_line"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/pale_grey_two"
-            app:layout_constraintTop_toBottomOf="@+id/ll_game_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
