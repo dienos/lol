@@ -16,5 +16,7 @@
     <string name="minutes_ago"> 전</string>
     <string name="minutes">%s분</string>
     <string name="hour">%s시간</string>
+    <string name="confirm">확인</string>
     <string name="most_position" tools:ignore="ExtraTranslation">포지션</string>
+    <string name="network_error">네트워크에 연결 되지 않았습니다.\n네트워크 상태를 확인 해주세요.</string>
 </resources>
