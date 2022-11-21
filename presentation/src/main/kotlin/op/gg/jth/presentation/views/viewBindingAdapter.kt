@@ -1,6 +1,7 @@
 package op.gg.jth.presentation.views
 
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,11 +29,18 @@ import java.text.DecimalFormat
 
 @BindingAdapter(value = ["type", "game_image"])
 fun setImage(view: ImageView, type: String, url: String?) {
+    Log.i("jth", "game_image :$url")
     url?.let {
+        var resultUrl = it
+
+        if(resultUrl.startsWith("https").not()) {
+            resultUrl = "https$url"
+        }
+
         if (type == IMAGE_TYPE_CIRCLE) {
-            Glide.with(view.context).load(it).circleCrop().into(view)
+            Glide.with(view.context).load(resultUrl).circleCrop().into(view)
         } else {
-            Glide.with(view.context).load(it).into(view)
+            Glide.with(view.context).load(resultUrl).into(view)
         }
     }
 }
@@ -167,11 +175,11 @@ private var isFirst = true
 fun setMostWinningRate(view: RecyclerView, items: List<LocalChampion>?) {
     items?.let {
         val adapter = MostWinningRateListAdapter(it)
-        view.adapter = adapter
         if (isFirst) {
             view.addItemDecoration(RecyclerDecoration(36))
             isFirst = false
         }
+        view.adapter = adapter
     }
 }
 
