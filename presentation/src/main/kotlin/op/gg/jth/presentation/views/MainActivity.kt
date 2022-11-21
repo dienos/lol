@@ -53,7 +53,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                             binding?.summonersShimmer?.stopShimmer()
                             binding?.summonersShimmer?.hideShimmer()
                             binding?.llSummonersShimmer?.root?.visibility = View.GONE
-                        }, 1000
+                        }, 500
                     )
 
                 }
@@ -71,7 +71,7 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
                             binding?.recentGameShimmer?.stopShimmer()
                             binding?.recentGameShimmer?.hideShimmer()
                             binding?.llRecentGameShimmer?.root?.visibility = View.GONE
-                        }, 1000
+                        }, 500
                     )
                 }
             }
