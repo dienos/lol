@@ -1,8 +1,7 @@
-package op.gg.jth.data.datasource
+package op.gg.jth.data.datasource.remote
 
 import op.gg.jth.data.api.OpggService
 import op.gg.jth.data.model.remote.GamesResponse
-import op.gg.jth.data.model.remote.SummonerResponse
 import javax.inject.Inject
 
 interface GamesRemoteSource {

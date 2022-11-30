@@ -1,6 +1,6 @@
 package op.gg.jth.data.repository
 
-import op.gg.jth.data.datasource.GamesRemoteSource
+import op.gg.jth.data.datasource.remote.GamesRemoteSource
 import op.gg.jth.domain.model.remote.GamesResponseRepo
 import op.gg.jth.domain.repository.remote.GamesRepository
 import javax.inject.Inject

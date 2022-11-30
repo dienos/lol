@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import op.gg.jth.data.repository.GamesRepositoryImpl
 import op.gg.jth.data.repository.SummonerRepositoryImpl
+import op.gg.jth.data.repository.local.LocalGamesRepositoryImpl
+import op.gg.jth.domain.repository.local.LocalGamesRepository
 import op.gg.jth.domain.repository.remote.GamesRepository
 import op.gg.jth.domain.repository.remote.SummonerRepository
 import javax.inject.Singleton
@@ -21,4 +23,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindGamesRepository(repository: GamesRepositoryImpl): GamesRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindLocalGamesRepository(repository: LocalGamesRepositoryImpl): LocalGamesRepository
 }

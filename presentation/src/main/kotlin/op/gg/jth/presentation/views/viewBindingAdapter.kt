@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import op.gg.jth.data.extension.getWinningRate
 import op.gg.jth.data.model.local.ItemUrl
 import op.gg.jth.data.model.local.LocalChampion
+import op.gg.jth.domain.model.local.ChampionRepo
 import op.gg.jth.domain.model.remote.*
 import op.gg.jth.presentation.R
 import op.gg.jth.presentation.viewmodels.MainViewModel
@@ -172,7 +173,7 @@ fun setLeagues(view: RecyclerView, items: List<LeagueRepo>?) {
 private var isFirst = true
 
 @BindingAdapter(value = ["most_winning_rate"])
-fun setMostWinningRate(view: RecyclerView, items: List<LocalChampion>?) {
+fun setMostWinningRate(view: RecyclerView, items: List<ChampionRepo>?) {
     items?.let {
         val adapter = MostWinningRateListAdapter(it)
         if (isFirst) {
@@ -283,7 +284,7 @@ fun setKda(view: TextView, games: List<GamesRepo>?) {
 @BindingAdapter(value = ["most_champion"])
 fun setGameWinningAverage(
     view: TextView,
-    champion: List<LocalChampion>?,
+    champion: List<ChampionRepo>?,
 ) {
     champion?.let {
         if (it.isNotEmpty()) {

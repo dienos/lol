@@ -1,6 +1,6 @@
 package op.gg.jth.data.repository
 
-import op.gg.jth.data.datasource.SummonerRemoteSource
+import op.gg.jth.data.datasource.remote.SummonerRemoteSource
 import op.gg.jth.data.model.remote.SummonerResponse
 import op.gg.jth.domain.repository.remote.SummonerRepository
 import javax.inject.Inject

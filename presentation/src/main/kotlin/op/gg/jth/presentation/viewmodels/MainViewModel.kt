@@ -7,13 +7,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import op.gg.jth.data.extension.getWinningRate
 import op.gg.jth.data.model.local.*
-import op.gg.jth.domain.model.remote.ChampionsRepo
-import op.gg.jth.domain.model.remote.GamesRepo
+import op.gg.jth.domain.model.local.MostWinningRateChampionsRepo
+import op.gg.jth.domain.model.local.RecentTwentyGamesRepo
 import op.gg.jth.domain.model.remote.GamesResponseRepo
 import op.gg.jth.domain.model.remote.SummonerResponseRepo
 import op.gg.jth.domain.usecase.GetGamesUseCase
+import op.gg.jth.domain.usecase.GetMostWinningRateChampionsUseCase
+import op.gg.jth.domain.usecase.GetRecentTwentyGamesUseCase
 import op.gg.jth.domain.usecase.GetSummonerUseCase
 import javax.inject.Inject
 
@@ -21,6 +22,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getSummonerUseCase: GetSummonerUseCase,
     private val getGamesUseCase: GetGamesUseCase,
+    private val getRecentTwentyGamesUseCase : GetRecentTwentyGamesUseCase,
+    private val getMostWinningRateChampionsUseCase : GetMostWinningRateChampionsUseCase,
 ) : BaseViewModel() {
     companion object {
         const val GAME_AVERAGE_TYPE_KILL = "kill"
@@ -53,14 +56,11 @@ class MainViewModel @Inject constructor(
     private var _gamesResponse = MutableLiveData<GamesResponseRepo>()
     val gamesResponse: LiveData<GamesResponseRepo> = _gamesResponse
 
-    private var _recentTwentyGames = MutableLiveData<RecentTwentyGames>()
-    val recentTwentyGames: LiveData<RecentTwentyGames> = _recentTwentyGames
+    private var _recentTwentyGames = MutableLiveData<RecentTwentyGamesRepo>()
+    val recentTwentyGames: LiveData<RecentTwentyGamesRepo> = _recentTwentyGames
 
-    private var _mostWinningRateChampions = MutableLiveData<MostWinningRateChampions>()
-    val mostWinningRateChampions: LiveData<MostWinningRateChampions> = _mostWinningRateChampions
-
-    private var _items = MutableLiveData<MostWinningRateChampions>()
-    val items: LiveData<MostWinningRateChampions> = _items
+    private var _mostWinningRateChampions = MutableLiveData<MostWinningRateChampionsRepo>()
+    val mostWinningRateChampions: LiveData<MostWinningRateChampionsRepo> = _mostWinningRateChampions
 
     private var _championPosition = MutableLiveData<ChampionPosition>()
     val championPosition: LiveData<ChampionPosition> = _championPosition
@@ -105,9 +105,8 @@ class MainViewModel @Inject constructor(
             updateGamesShimmer(false)
 
             _gamesResponse.value = result
-            _recentTwentyGames.value = RecentTwentyGames(getRecentTwentyList(result.games))
-            _mostWinningRateChampions.value =
-                MostWinningRateChampions(getMostWinningRateChampions(result.champions))
+            _recentTwentyGames.value = getRecentTwentyGamesUseCase(result)
+            _mostWinningRateChampions.value = getMostWinningRateChampionsUseCase(result.champions)
             _championPosition.value = ChampionPosition(result.positions)
         }, {
             updateToast(it)
@@ -115,40 +114,6 @@ class MainViewModel @Inject constructor(
             updateGamesShimmer(false)
             updateProgress(false)
         })
-    }
-
-    private fun getRecentTwentyList(games: List<GamesRepo>): List<GamesRepo> =
-        games.filterIndexed { index, _ ->
-            index < 20
-        }
-
-    private fun getMostWinningRateChampions(champions: List<ChampionsRepo>): List<LocalChampion> {
-        val result: ArrayList<LocalChampion> = arrayListOf()
-
-        champions.sortedBy {
-            val winsValue = it.wins.toFloat()
-            val lossesValue = it.losses.toFloat()
-            val sum = winsValue.plus(lossesValue)
-
-            sum.getWinningRate(winsValue)
-        }.toMutableList().forEach { champion ->
-            if (result.size >= 2) {
-                return@forEach
-            }
-
-            val winsValue = champion.wins.toFloat()
-            val lossesValue = champion.losses.toFloat()
-            val sum = winsValue.plus(lossesValue)
-
-            result.add(
-                LocalChampion(
-                    imageUrl = champion.imageUrl,
-                    winningRate = sum.getWinningRate(winsValue)
-                )
-            )
-        }
-
-        return result
     }
 
     private fun updateSummonerShimmer(flow: Boolean) {

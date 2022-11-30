@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import op.gg.jth.data.model.local.LocalChampion
+import op.gg.jth.domain.model.local.ChampionRepo
 import op.gg.jth.presentation.BR
 import op.gg.jth.presentation.databinding.MostWinningRateItemBinding
 
-class MostWinningRateListAdapter(var champions: List<LocalChampion>) :
+class MostWinningRateListAdapter(var champions: List<ChampionRepo>) :
     RecyclerView.Adapter<MostWinningRateListAdapter.MostWinningRateViewHolder>() {
 
     private lateinit var binding: MostWinningRateItemBinding
 
     inner class MostWinningRateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: LocalChampion) {
+        fun bind(item: ChampionRepo) {
             binding.setVariable(BR.championItem, item)
         }
     }

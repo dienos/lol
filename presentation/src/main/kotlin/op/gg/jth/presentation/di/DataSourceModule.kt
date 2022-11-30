@@ -4,10 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import op.gg.jth.data.datasource.GamesRemoteSource
-import op.gg.jth.data.datasource.GamesRemoteSourceImpl
-import op.gg.jth.data.datasource.SummonerRemoteSource
-import op.gg.jth.data.datasource.SummonerRemoteSourceImpl
+import op.gg.jth.data.datasource.local.GamesLocalSource
+import op.gg.jth.data.datasource.local.GamesLocalSourceImpl
+import op.gg.jth.data.datasource.remote.GamesRemoteSource
+import op.gg.jth.data.datasource.remote.GamesRemoteSourceImpl
+import op.gg.jth.data.datasource.remote.SummonerRemoteSource
+import op.gg.jth.data.datasource.remote.SummonerRemoteSourceImpl
 import javax.inject.Singleton
 
 @Module
@@ -20,4 +22,8 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun bindGamesRemoteSource(source: GamesRemoteSourceImpl): GamesRemoteSource
+
+    @Singleton
+    @Binds
+    abstract fun bindGamesLocalSource(source: GamesLocalSourceImpl): GamesLocalSource
 }
